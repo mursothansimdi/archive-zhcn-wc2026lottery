@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯 · 简明知识库与访问指引</title>
+    <style>
+        /* 重置 & 基础 */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            color: #1e2a3e;
+            line-height: 1.6;
+            padding: 2rem 1.2rem;
+        }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 卡片系统 */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e0e4e9;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.8rem;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        /* 目录感布局 */
+        .hero {
+            text-align: center;
+            padding: 2.5rem 2rem 2rem;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e6ec;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2.2rem;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b1a2a;
+            margin-bottom: 0.6rem;
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #4a5a72;
+            max-width: 560px;
+            margin: 0 auto 0.6rem;
+        }
+        .hero .meta {
+            font-size: 0.85rem;
+            color: #7c8a9e;
+            border-top: 1px solid #e8ecf2;
+            padding-top: 1.2rem;
+            margin-top: 0.8rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem 2rem;
+            flex-wrap: wrap;
+        }
+        .meta span::before {
+            content: "·";
+            margin-right: 0.4rem;
+            color: #aab5c7;
+        }
+
+        /* 网格目录 */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 1.8rem;
+        }
+        @media (max-width: 700px) {
+            .grid-2col { grid-template-columns: 1fr; }
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+            color: #1a2b3f;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card-header small {
+            font-weight: 400;
+            font-size: 0.75rem;
+            background: #eaeef5;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            color: #3b526c;
+            letter-spacing: 0.02em;
+        }
+
+        /* 列表样式 */
+        .list-simple {
+            list-style: none;
+            padding: 0;
+        }
+        .list-simple li {
+            padding: 0.45rem 0;
+            border-bottom: 1px dashed #e6ebf2;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .list-simple li:last-child { border-bottom: none; }
+        .list-simple li::before {
+            content: "▹";
+            color: #3c6e9c;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef3f9;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #2b4b6e;
+            margin-left: 0.3rem;
+        }
+
+        .highlight-link {
+            color: #1c4d7a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b8cbde;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .highlight-link:hover {
+            color: #0a2b46;
+            border-bottom-color: #1c4d7a;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+            margin-top: 1rem;
+        }
+        .info-item {
+            flex: 1 1 180px;
+            background: #f6f8fc;
+            border-radius: 12px;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid #e5eaf1;
+        }
+        .info-item strong {
+            display: block;
+            font-size: 0.9rem;
+            color: #1b2c40;
+            margin-bottom: 0.3rem;
+        }
+        .info-item span {
+            font-size: 0.85rem;
+            color: #3b516c;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eaeef4;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q {
+            font-weight: 600;
+            color: #1a2e46;
+            margin-bottom: 0.2rem;
+            font-size: 0.98rem;
+        }
+        .faq-a {
+            color: #41546d;
+            font-size: 0.92rem;
+        }
+
+        .alert-badge {
+            background: #fef7e9;
+            border-left: 4px solid #d99e3c;
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1.8rem;
+            border: 1px solid #eddbbd;
+            font-size: 0.95rem;
+            color: #3b3f46;
+        }
+        .alert-badge strong {
+            color: #865d1e;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: #697b92;
+            border-top: 1px solid #dce2ea;
+            padding-top: 1.8rem;
+        }
+        .footer-note a {
+            color: #2b4f74;
+            text-decoration: none;
+            border-bottom: 1px dotted #b0c3d9;
+        }
+        .footer-note a:hover {
+            border-bottom-color: #2b4f74;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 1rem 0.8rem; }
+            .card { padding: 1.2rem 1.2rem; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HERO / 简明指南入口 -->
+    <div class="hero">
+        <h1>⚽ 世界杯 · 知识库</h1>
+        <p class="sub">赛事信息 · 访问提醒 · 实用指引 · 一次收拢</p>
+        <div class="meta">
+            <span>2026 美加墨</span>
+            <span>预选赛阶段</span>
+            <span>官方信息整合</span>
+        </div>
+    </div>
+
+    <!-- 提示区 / 访问提醒 -->
+    <div class="alert-badge">
+        <strong>🛡️ 访问提醒：</strong> 建议使用最新版浏览器，确保网络环境稳定。赛事期间信息更新频繁，请以官方渠道为准。本站为知识汇集入口，核心链接指向 <a href="https://zhcn-wc2026lottery.com" class="highlight-link">世界杯</a> 相关说明页，不收集个人信息。
+    </div>
+
+    <!-- 双栏目录感布局 -->
+    <div class="grid-2col">
+
+        <!-- 简明指南 / 特点 -->
+        <div class="card">
+            <div class="card-header">
+                📘 简明指南
+                <small>快速参考</small>
+            </div>
+            <ul class="list-simple">
+                <li>赛程结构：48 队分 12 组，小组前二及 8 个最佳小组第三晋级</li>
+                <li>主办城市：16 个场馆分布于美国、加拿大、墨西哥</li>
+                <li>关键日期：小组赛 2026.6.11 – 7.19</li>
+                <li>抽签仪式：2025 年底 <span class="tag">待确认</span></li>
+                <li>官方票务：分阶段销售，需提前注册验证</li>
+            </ul>
+            <div style="margin-top: 0.8rem; font-size: 0.9rem; color: #3b516c;">
+                ↳ 更多细节可通过 <a href="https://zhcn-wc2026lottery.com" class="highlight-link">世界杯</a> 专题页面查阅。
+            </div>
+        </div>
+
+        <!-- 相关信息区 / 实用场景 -->
+        <div class="card">
+            <div class="card-header">
+                📌 相关信息
+                <small>一站式索引</small>
+            </div>
+            <div class="info-row">
+                <div class="info-item">
+                    <strong>🏟️ 场馆分布</strong>
+                    <span>西雅图 · 洛杉矶 · 纽约 · 墨西哥城 · 温哥华 …</span>
+                </div>
+                <div class="info-item">
+                    <strong>📅 预选赛动态</strong>
+                    <span>南美区已开启，亚洲区第三轮进行中</span>
+                </div>
+                <div class="info-item">
+                    <strong>📺 转播信息</strong>
+                    <span>多家媒体已获授权，4K 直播覆盖</span>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.9rem; border-top: 1px solid #edf1f7; padding-top: 0.8rem;">
+                🔗 关于票务、规则及最新公告，可参考 <a href="https://zhcn-wc2026lottery.com" class="highlight-link">世界杯</a> 信息页。
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要区 / 第二个提示区 -->
+    <div class="card">
+        <div class="card-header">
+            ❓ 常见疑问摘要
+            <small>快捷了解</small>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">如何确认自己是否符合购票资格？</div>
+            <div class="faq-a">大多数场次面向全球公众，部分国家有特定分配。建议留意官方通知，也可通过 <a href="https://zhcn-wc2026lottery.com" class="highlight-link">世界杯</a> 页面获取分阶段指引。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否有官方酒店或旅行套餐？</div>
+            <div class="faq-a">组委会将公布合作旅行商，不指定单一套餐。出行前可查询目的地入境政策及签证要求。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">比赛时间如何安排？</div>
+            <div class="faq-a">小组赛每日多场，淘汰赛阶段间隔约 2–3 日。具体时间以赛程确认为准。</div>
+        </div>
+        <div style="font-size: 0.88rem; margin-top: 0.8rem; color: #4b627e;">
+            ⚡ 若需更详尽解释，请前往 <a href="https://zhcn-wc2026lottery.com" class="highlight-link">世界杯</a> 知识库浏览完整版。
+        </div>
+    </div>
+
+    <!-- 补充说明区 / 第三卡片 -->
+    <div class="card" style="margin-bottom: 1.2rem;">
+        <div class="card-header">
+            📎 说明与使用场景
+            <small>开放索引</small>
+        </div>
+        <p style="margin-bottom: 0.6rem;">本站为信息汇总页，旨在提供结构化参考。适合以下场景：</p>
+        <ul class="list-simple" style="margin-bottom: 0.6rem;">
+            <li>快速了解 2026 世界杯框架与关键节点</li>
+            <li>确认访问<a href="https://zhcn-wc2026lottery.com" class="highlight-link">世界杯</a>相关页面时的注意事项</li>
+            <li>获取赛程、场馆及票务阶段的精简备忘录</li>
+        </ul>
+        <p style="font-size: 0.9rem; color: #3b516c; margin-top: 0.5rem;">内容基于公开资料整理，不构成官方立场。最终信息以赛事组织方公告为准。</p>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note">
+        ⚽ 此页面为独立知识索引，与 <a href="https://zhcn-wc2026lottery.com">世界杯</a> 关联。 · 更新于 2025
+    </div>
+
+</div>
+</body>
+</html>
